@@ -5,7 +5,7 @@ import SquareField from './Components/SquareField/SquareField';
 // CREATION OF SQUARE FILED (WIDTH, HEIGHT, SizeOfEachSquareInPixels, MARGIN, COLOR)
 const squareField = new SquareField(3, 3, 100, 10, 'red');
 squareField.createAllSquaresArray();
-
+squareField.makeRandomNumbers();
 
 
 const App = () => {
@@ -22,17 +22,19 @@ let squareDiv = squareField.getSquareDiv();
 
   const reloadField = () => {
     squareField._allSquares.map((square) => {
-      if (square.state === 'open') {
+      if (square.state === squareField.open) {
       return CreationOfTheGame();
       }
     })
   }
+  console.log(squareField.randomObject);
+  console.log(squareField.minesArray);
+
 
   return (
     <div onClick={reloadField} className="container">
       {squareDiv}
   
-<button onClick={CreationOfTheGame}>FUCK YOU</button>
     </div>
   );
 }

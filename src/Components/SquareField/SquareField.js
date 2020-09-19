@@ -10,7 +10,7 @@ class SquareField {
             let squareParam = {
                 hasItem: 'empty',
                 state: 'closed',
-                mine: 'noMine',
+                mine: 'chance',
                 id: 0
             }
             this._allSquares.push(squareParam);
@@ -29,7 +29,7 @@ class SquareField {
                     <Square 
                     key = {square.id}
                     squareOpenOnClick = {() => {this.pickASquare(square.id)}}
-                    squareClass = {square.state}
+                    squareClass = {`${square.state} ${square.hasItem} ${square.mine}`}
                     squareStyle = {this.setSquareStyle()}
                     />
                 )
@@ -60,11 +60,28 @@ return squaresDiv
     pickASquare(id) {
         const index = this._allSquares.findIndex((square) => square.id === id);
         const oneSquare = {...this._allSquares[index]};
-        oneSquare.state = 'open';
+        oneSquare.state = this.open;
+        if(oneSquare.id === this.randomObject) {
+            oneSquare.hasItem = this.objectFound;
+            oneSquare.state = 'closed';
+        }
         this._allSquares[index] = oneSquare;
     }
     clearSquareArray() {
         return this._allSquares = [];
+    }
+    makeRandomNumbers() {
+        this.randomObject = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight));
+        this.minesArray = [];
+        for (let i = 0; i < 5; i++){
+            this.randomMine = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight));
+            if (this.randomObject === this.randomMine || this.minesArray.includes(this.randomMine)) {
+                i--
+                continue;
+            } else {
+                this.minesArray.push(this.randomMine);
+        }
+    }
     }
     constructor(fieldWidth, fieldHeight, squareSize, squareMargin, squareColor) {
         this._fieldWidth = fieldWidth;
@@ -74,6 +91,9 @@ return squaresDiv
         this._squareColor = squareColor;
     }
     _allSquares = [];
+    open = 'open';
+    mine = 'mine';
+    objectFound = 'objectFound';
 }
 
 export default SquareField;

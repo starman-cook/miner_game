@@ -6,3 +6,7 @@
 .open {
     background: green !important ;
 }
+
+.objectFound {
+    background: black !important;
+}
