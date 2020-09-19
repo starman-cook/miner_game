@@ -3,9 +3,11 @@ import './App.css';
 import SquareField from './Components/SquareField/SquareField';
 import CounterOfTries from './Components/CounterOfTries/CounterOfTries';
 import ButtonReset from './Components/ButtonReset/ButtonReset';
+import CongratsMessage from './Components/CongratsMessage/CongratsMessage';
+
 
 // CREATION OF SQUARE FILED (WIDTH, HEIGHT, SizeOfEachSquareInPixels, MARGIN, COLOR)
-const squareField = new SquareField(3, 3, 100, 10, 'red');
+const squareField = new SquareField(6, 6, 100, 10, 'red');
 squareField.createAllSquaresArray();
 squareField.makeRandomNumbers();
 
@@ -38,6 +40,8 @@ const App = () => {
     squaresCopy.push(squareField.getSquareArray());
     squareField.counter = 0;
     squareField.gameIsOver = false;
+    squareField.congrats = false;
+    squareField.fail = false;
     setGame(squaresCopy);
     squareDiv = squareField.getSquareDiv();
   }
@@ -50,6 +54,14 @@ const App = () => {
     btnOnClickReset={resetTheGame}
     text='Reset the Game'
     />
+    {squareField.congrats ? 
+    <CongratsMessage 
+    text={`Congratulations!!! You found it! You have made ${squareField.counter} tries.`}/> 
+    : null}
+    {squareField.fail ? 
+    <CongratsMessage 
+    text='You have steped on mine, the game is lost!(((('/> 
+    : null}
     </div>
   );
 }

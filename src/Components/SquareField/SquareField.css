@@ -11,3 +11,7 @@
 .objectFound {
     background: black !important;
 }
+
+.mine {
+    background: orange !important;
+}

@@ -71,6 +71,11 @@ return squaresDiv
             this.gameIsOver = true;
             // add this if you dont want to count as try when you find object
             // this.counter--; 
+            this.congrats = true;
+        } else if (this.minesArray.includes(oneSquare.id)) {
+            oneSquare.mine = this.mine;
+            this.fail = true;
+            this.gameIsOver = true;
         }
         this.counter++;
         }
@@ -81,10 +86,10 @@ return squaresDiv
         return this._allSquares = [];
     }
     makeRandomNumbers() {
-        this.randomObject = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight));
+        this.randomObject = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight - 1));
         this.minesArray = [];
         for (let i = 0; i < 5; i++){
-            this.randomMine = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight));
+            this.randomMine = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight - 1));
             if (this.randomObject === this.randomMine || this.minesArray.includes(this.randomMine)) {
                 i--
                 continue;
@@ -106,6 +111,8 @@ return squaresDiv
     objectFound = 'objectFound';
     detection = 'mineFound';
     gameIsOver = false;
+    congrats = false;
+    fail = false;
     counter = 0;
 }
 
