@@ -1,24 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SquareField from './Components/SquareField/SquareField';
 
-function App() {
+
+const squareField = new SquareField(4, 4, 1, 1);
+
+const App = () => {
+
+    squareField.createAllSquaresArray();
+    const squareDiv = squareField.getSquareDiv();
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {squareDiv}
+
     </div>
   );
 }
