@@ -11,6 +11,7 @@ class SquareField {
                 hasItem: 'empty',
                 state: 'closed',
                 mine: 'chance',
+                detection: 'noDetection',
                 id: 0
             }
             this._allSquares.push(squareParam);
@@ -29,7 +30,7 @@ class SquareField {
                     <Square 
                     key = {square.id}
                     squareOpenOnClick = {() => {this.pickASquare(square.id)}}
-                    squareClass = {`${square.state} ${square.hasItem} ${square.mine}`}
+                    squareClass = {`${square.state} ${square.hasItem} ${square.mine} ${square.detection}`}
                     squareStyle = {this.setSquareStyle()}
                     />
                 )
@@ -58,12 +59,16 @@ return squaresDiv
         return squareStyle
     }
     pickASquare(id) {
+        if (this._gameIsOver === true) {
+            return;
+        }
         const index = this._allSquares.findIndex((square) => square.id === id);
         const oneSquare = {...this._allSquares[index]};
         oneSquare.state = this.open;
         if(oneSquare.id === this.randomObject) {
             oneSquare.hasItem = this.objectFound;
             oneSquare.state = 'closed';
+            this._gameIsOver = true;
         }
         this._allSquares[index] = oneSquare;
     }
@@ -94,6 +99,8 @@ return squaresDiv
     open = 'open';
     mine = 'mine';
     objectFound = 'objectFound';
+    detection = 'mineFound';
+    _gameIsOver = false;
 }
 
 export default SquareField;
