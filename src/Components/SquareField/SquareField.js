@@ -59,7 +59,7 @@ return squaresDiv
         return squareStyle
     }
     pickASquare(id) {
-        if (this._gameIsOver === true) {
+        if (this.gameIsOver === true) {
             return;
         }
         const index = this._allSquares.findIndex((square) => square.id === id);
@@ -68,7 +68,7 @@ return squaresDiv
         oneSquare.state = this.open;
         if(oneSquare.id === this.randomObject) {
             oneSquare.hasItem = this.objectFound;
-            this._gameIsOver = true;
+            this.gameIsOver = true;
             // add this if you dont want to count as try when you find object
             // this.counter--; 
         }
@@ -105,7 +105,7 @@ return squaresDiv
     mine = 'mine';
     objectFound = 'objectFound';
     detection = 'mineFound';
-    _gameIsOver = false;
+    gameIsOver = false;
     counter = 0;
 }
 
