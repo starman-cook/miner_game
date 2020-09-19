@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import SquareField from './Components/SquareField/SquareField';
+import CounterOfTries from './Components/CounterOfTries/CounterOfTries';
+
 
 // CREATION OF SQUARE FILED (WIDTH, HEIGHT, SizeOfEachSquareInPixels, MARGIN, COLOR)
 const squareField = new SquareField(3, 3, 100, 10, 'red');
@@ -34,7 +36,7 @@ let squareDiv = squareField.getSquareDiv();
   return (
     <div onClick={reloadField} className="container">
       {squareDiv}
-  
+    <CounterOfTries text={squareField.counter} />
     </div>
   );
 }

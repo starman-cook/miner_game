@@ -64,12 +64,17 @@ return squaresDiv
         }
         const index = this._allSquares.findIndex((square) => square.id === id);
         const oneSquare = {...this._allSquares[index]};
+        if (oneSquare.state === 'closed') {
         oneSquare.state = this.open;
         if(oneSquare.id === this.randomObject) {
             oneSquare.hasItem = this.objectFound;
-            oneSquare.state = 'closed';
             this._gameIsOver = true;
+            // add this if you dont want to count as try when you find object
+            // this.counter--; 
         }
+        this.counter++;
+        }
+        
         this._allSquares[index] = oneSquare;
     }
     clearSquareArray() {
@@ -101,6 +106,7 @@ return squaresDiv
     objectFound = 'objectFound';
     detection = 'mineFound';
     _gameIsOver = false;
+    counter = 0;
 }
 
 export default SquareField;
