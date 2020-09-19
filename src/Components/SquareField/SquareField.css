@@ -15,7 +15,8 @@
 
 
 .mineFound {
-    background: gray !important;
+    background: url(../../images/Plain-Orange-Flag.png)center no-repeat !important;
+    background-size: contain !important;
 }
 .mine {
     background: orange !important;
