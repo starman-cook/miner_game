@@ -12,6 +12,11 @@
     background: black !important;
 }
 
+
+
+.mineFound {
+    background: gray !important;
+}
 .mine {
     background: orange !important;
 }

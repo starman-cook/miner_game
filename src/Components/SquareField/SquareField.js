@@ -62,7 +62,7 @@ return squaresDiv
         if (this.gameIsOver === true) {
             return;
         }
-        const index = this._allSquares.findIndex((square) => square.id === id);
+        let index = this._allSquares.findIndex((square) => square.id === id);
         const oneSquare = {...this._allSquares[index]};
         if (oneSquare.state === 'closed') {
         oneSquare.state = this.open;
@@ -76,6 +76,27 @@ return squaresDiv
             oneSquare.mine = this.mine;
             this.fail = true;
             this.gameIsOver = true;
+        }
+        // if (this.minesArray.includes(oneSquare.id - 1, oneSquare + 1, oneSquare.id - this._fieldWidth, oneSquare.id + this._fieldWidth)) {
+            
+        //     oneSquare.detection = this.detection;
+        // }
+        if (this.minesArray.includes(oneSquare.id - 1)) {
+            oneSquare.state = this.open;
+            this._allSquares[index - 1].detection = this.detection;
+        }
+        if (this.minesArray.includes(oneSquare.id + 1)) {
+            oneSquare.state = this.open;
+            this._allSquares[index + 1].detection = this.detection;
+        }
+        if (this.minesArray.includes(oneSquare.id - this.fieldWidth)) {
+            oneSquare.state = this.open;
+            this._allSquares[index - this.fieldWidth].detection = this.detection;
+        }
+        if (this.minesArray.includes(oneSquare.id + this.fieldWidth)) {
+            oneSquare.state = this.open;
+            this._allSquares[index + this.fieldWidth].detection = this.detection;
+
         }
         this.counter++;
         }
