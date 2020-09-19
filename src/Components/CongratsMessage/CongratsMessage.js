@@ -1,4 +1,5 @@
 import React from 'react';
+import './CongratsMessage.css';
 
 const CongratsMessage = (props) => {
     return (

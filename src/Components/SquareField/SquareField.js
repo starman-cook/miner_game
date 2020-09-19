@@ -97,7 +97,7 @@ return squaresDiv
         }
         if (this.minesArray.includes(oneSquare.id - this._fieldWidth)) {
             oneSquare.state = this.open;
-            if(this.gameIsOver === true && (this.leftSide.includes(!oneSquare.id) && this.rightSide.includes(!oneSquare.id))) {
+            if(this.gameIsOver === true) {
             //    do nothing)) do not use return!!!
             } else {
             this._allSquares[index - this._fieldWidth].detection = this.detection;
@@ -105,7 +105,7 @@ return squaresDiv
         }
         if (this.minesArray.includes(oneSquare.id + this._fieldWidth)) {
             oneSquare.state = this.open;
-            if(this.gameIsOver === true && (this.leftSide.includes(!oneSquare.id) && this.rightSide.includes(!oneSquare.id))) {
+            if(this.gameIsOver === true) {
             //    do nothing))  do not use return!!!
             } else {
             this._allSquares[index + this._fieldWidth].detection = this.detection;
@@ -122,7 +122,7 @@ return squaresDiv
     makeRandomNumbers() {
         this.randomObject = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight - 1));
         this.minesArray = [];
-        for (let i = 0; i < 5; i++){
+        for (let i = 0; i < this._amountOfMines; i++){
             this.randomMine = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight - 1));
             if (this.randomObject === this.randomMine || this.minesArray.includes(this.randomMine)) {
                 i--
@@ -140,12 +140,13 @@ return squaresDiv
             this.rightSide.push((this._fieldWidth * i) - 1);
         }
     }
-    constructor(fieldWidth, fieldHeight, squareSize, squareMargin, squareColor) {
+    constructor(fieldWidth, fieldHeight, squareSize, squareMargin, amountOfMines, squareColor) {
         this._fieldWidth = fieldWidth;
         this._fieldHeight = fieldHeight;
         this._squareSize = String(squareSize);
         this._squareMargin = String(squareMargin);
         this._squareColor = squareColor;
+        this._amountOfMines = amountOfMines;
     }
     _allSquares = [];
     open = 'open';

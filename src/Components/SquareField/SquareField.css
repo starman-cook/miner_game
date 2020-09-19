@@ -1,23 +1,20 @@
 .squareField {
-    padding: 20px;
-    border:2px solid black;
+    padding: 10px;
+    border:2px solid #494949;
     margin: 0 auto;
 }
-
 .open {
-    background: green !important ;
+    background: orange !important ;
 }
-
 .objectFound {
-    background: black !important;
+    background: url(../../images/chest.png) 0 0 no-repeat !important;
+    background-size: cover !important;
 }
-
-
-
 .mineFound {
-    background: url(../../images/Plain-Orange-Flag.png)center no-repeat !important;
+    background: url(../../images/flag_detection.png) center no-repeat !important;
     background-size: contain !important;
 }
 .mine {
-    background: orange !important;
+    background: url(../../images/pumkin_mine.png) center no-repeat !important;
+    background-size: contain !important;
 }

@@ -1,0 +1,9 @@
+.congrats_block {
+    margin: 0 auto;
+    width: 280px;
+    text-align: center;
+}
+.congrats_block__text {
+    color: #494949;
+    font-weight: bold;
+}
