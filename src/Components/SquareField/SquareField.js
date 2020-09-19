@@ -1,5 +1,6 @@
 import React from 'react';
 import Square from '../Square/Square';
+import './SquareField.css';
 
 
 class SquareField {
@@ -15,7 +16,9 @@ class SquareField {
             this._allSquares.push(squareParam);
             squareParam.id = i;
         }
-        console.log(this._allSquares);
+    }
+    getSquareArray() {
+        return this._allSquares;
     }
     getSquareDiv() {
         const squaresDiv = (
@@ -38,7 +41,6 @@ return squaresDiv
     }
     setFieldStyle () {
         let fieldStyle = {
-            // width: '500px',
             width: `${this._fieldWidth * this._squareSize + this._fieldWidth * (this._squareMargin * 2)}px`,
             height: `${this._fieldHeight * this._squareSize + this._fieldHeight * (this._squareMargin * 2)}px`,
             display: 'flex',
@@ -56,8 +58,10 @@ return squaresDiv
         return squareStyle
     }
     pickASquare(id) {
-        const oneSquare = this.allSquares[id]
+        const index = this._allSquares.findIndex((square) => square.id === id);
+        const oneSquare = {...this._allSquares[index]};
         oneSquare.state = 'open';
+        this._allSquares[index] = oneSquare;
     }
     clearSquareArray() {
         return this._allSquares = [];
