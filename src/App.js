@@ -68,7 +68,7 @@ const App = () => {
     <CongratsMessage 
     text='You have steped on pumkin-mine, the game is lost!(((('/> 
     : null}
-    <p>
+    <p className='instructions'>
       Инструкция: на поле спрятан сундук, но на поле также есть мины 
       для помощи при клике на безопасную клетку вы видите есть ли мины возле вас, 
       они обозначатся флажком. Внутри App.js вы можете очень легко менять 
