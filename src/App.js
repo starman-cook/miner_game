@@ -14,7 +14,7 @@ import CongratsMessage from './Components/CongratsMessage/CongratsMessage';
 //  и начальный цвет когда все клетки закрыты
 
 // CREATION OF SQUARE FILED (WIDTH, HEIGHT, SizeOfEachSquareInPixels, MARGIN, COLOR)
-const squareField = new SquareField(6, 6, 100, 8, 5, '#494949');
+const squareField = new SquareField(6, 6, 100, 5, 10, '#494949');
 squareField.createAllSquaresArray();
 squareField.makeRandomNumbers();
 squareField.findSidesForDetectionHidden();
@@ -93,6 +93,7 @@ const App = () => {
       мины либо сверху от вас, либо снизу, или слева или справа, при умелом счете вы 
       сможете найти сокровища. Внутри App.js на 17 строчке вы также можете очень легко менять 
       размеры поля, размер клеток, количество мин и дефолтный цвет клеток.
+      Очень реомендую играть в Сложном Моде и плюс задать "10, 10, 50, 5, 30, '#494949'" полю, игра очень интересная в таком виде!.
       Приятной игры!
     </p>
     
