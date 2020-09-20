@@ -6,16 +6,17 @@
 .open {
     background: orange !important ;
 }
-.objectFound {
-    background: url(../../images/chest.png) 0 0 no-repeat !important;
-    background-size: cover !important;
-}
+
 .mineFound {
     background: url(../../images/flag_detection.png) center no-repeat !important;
     background-size: contain !important;
 }
 .around {
     background: red !important;
+}
+.objectFound {
+    background: url(../../images/chest.png) 0 0 no-repeat !important;
+    background-size: cover !important;
 }
 .mine {
     background: url(../../images/pumkin_mine.png) center no-repeat !important;
