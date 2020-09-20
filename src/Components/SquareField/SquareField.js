@@ -11,6 +11,7 @@ class SquareField {
                 hasItem: 'empty',
                 state: 'closed',
                 mine: 'chance',
+                around: 'nothing',
                 detection: 'noDetection',
                 id: 0
             }
@@ -30,7 +31,7 @@ class SquareField {
                     <Square 
                     key = {square.id}
                     squareOpenOnClick = {() => {this.pickASquare(square.id)}}
-                    squareClass = {`${square.state} ${square.hasItem} ${square.mine} ${square.detection}`}
+                    squareClass = {`${square.state} ${square.hasItem} ${square.mine} ${square.detection} ${square.around}`}
                     squareStyle = {this.setSquareStyle()}
                     />
                 )
@@ -79,6 +80,22 @@ return squaresDiv
         }
 
         // Mine detection
+        // Hard level
+        if (this.diffLevel === true) {
+        if (this.minesArray.includes(oneSquare.id - 1) && !this.leftSide.includes(oneSquare.id)) {
+            oneSquare.around = this.around;
+        }
+        if (this.minesArray.includes(oneSquare.id + 1) && !this.rightSide.includes(oneSquare.id)) {
+            oneSquare.around = this.around;
+        }
+        if (
+            this.minesArray.includes(oneSquare.id - this._fieldWidth) ||
+            this.minesArray.includes(oneSquare.id + this._fieldWidth)) {
+            oneSquare.around = this.around;
+            }
+        }
+        // Easy level
+        if (this.diffLevel === false) {
         if (this.minesArray.includes(oneSquare.id - 1)) {
             oneSquare.state = this.open;
             if(this.leftSide.includes(oneSquare.id) || this.gameIsOver === true){
@@ -111,9 +128,10 @@ return squaresDiv
             this._allSquares[index + this._fieldWidth].detection = this.detection;
             }
         }
+    }
         this.counter++;
-        }
         
+    }
         this._allSquares[index] = oneSquare;
     }
     clearSquareArray() {
@@ -140,6 +158,15 @@ return squaresDiv
             this.rightSide.push((this._fieldWidth * i) - 1);
         }
     }
+    switchDifficultMode() {
+        console.log(this.diffLevel);
+        return this.diffLevel = true;
+    }
+    switchEasyMode() {
+        console.log(this.diffLevel);
+
+        return this.diffLevel = false;
+    }
     constructor(fieldWidth, fieldHeight, squareSize, squareMargin, amountOfMines, squareColor) {
         this._fieldWidth = fieldWidth;
         this._fieldHeight = fieldHeight;
@@ -153,11 +180,12 @@ return squaresDiv
     mine = 'mine';
     objectFound = 'objectFound';
     detection = 'mineFound';
+    around = 'around';
     gameIsOver = false;
     congrats = false;
     fail = false;
     counter = 0;
-    
+    diffLevel = false;
 }
 
 export default SquareField;

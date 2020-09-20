@@ -6,3 +6,6 @@
 .instructions {
   text-align: center;
 }
+.switch_mode {
+  display: flex;
+}

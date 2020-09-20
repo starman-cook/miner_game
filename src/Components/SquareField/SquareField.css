@@ -14,6 +14,9 @@
     background: url(../../images/flag_detection.png) center no-repeat !important;
     background-size: contain !important;
 }
+.around {
+    background: red !important;
+}
 .mine {
     background: url(../../images/pumkin_mine.png) center no-repeat !important;
     background-size: contain !important;

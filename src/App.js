@@ -14,7 +14,7 @@ import CongratsMessage from './Components/CongratsMessage/CongratsMessage';
 //  и начальный цвет когда все клетки закрыты
 
 // CREATION OF SQUARE FILED (WIDTH, HEIGHT, SizeOfEachSquareInPixels, MARGIN, COLOR)
-const squareField = new SquareField(6, 6, 80, 5, 15, '#494949');
+const squareField = new SquareField(6, 6, 100, 8, 5, '#494949');
 squareField.createAllSquaresArray();
 squareField.makeRandomNumbers();
 squareField.findSidesForDetectionHidden();
@@ -51,15 +51,32 @@ const App = () => {
     setGame(squaresCopy);
     squareDiv = squareField.getSquareDiv();
   }
-
+  const hardMode = () => {
+    squareField.switchDifficultMode();
+    resetTheGame()
+  }
+  const easyMode = () => {
+    squareField.switchEasyMode();
+    resetTheGame()
+  }
   return (
     <div onClick={reloadField} className="container">
       {squareDiv}
     <CounterOfTries text={`Tries made:  ${squareField.counter}`} />
+    <div className='switch_mode'>
+    <ButtonReset 
+    btnOnClickReset={hardMode}
+    text='Hard Game Mode'
+    />
     <ButtonReset 
     btnOnClickReset={resetTheGame}
     text='Reset the Game'
     />
+    <ButtonReset 
+    btnOnClickReset={easyMode}
+    text='Easy Game Mode'
+    />
+    </div>
     {squareField.congrats ? 
     <CongratsMessage 
     text={`Congratulations!!! You found the treasures and won the game! You have made ${squareField.counter} tries.`}/> 
@@ -69,12 +86,16 @@ const App = () => {
     text='You have steped on pumkin-mine, the game is lost!(((('/> 
     : null}
     <p className='instructions'>
-      Инструкция: на поле спрятан сундук, но на поле также есть мины 
-      для помощи при клике на безопасную клетку вы видите есть ли мины возле вас, 
-      они обозначатся флажком. Внутри App.js вы можете очень легко менять 
+      Инструкция: на поле спрятан сундук, но на поле также есть мины, 
+      для помощи в легком режиме игры при клике на безопасную клетку вы видите есть ли мины возле вас, 
+      они обозначаются флажком. 
+      На сложном уровне игры вы столкнетесь с красными клетками, они означают, что 
+      мины либо сверху от вас, либо снизу, или слева или справа, при умелом счете вы 
+      сможете найти сокровища. Внутри App.js на 17 строчке вы также можете очень легко менять 
       размеры поля, размер клеток, количество мин и дефолтный цвет клеток.
       Приятной игры!
     </p>
+    
     </div>
   );
 }
