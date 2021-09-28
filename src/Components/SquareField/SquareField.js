@@ -24,24 +24,24 @@ class SquareField {
     }
     getSquareDiv() {
         const squaresDiv = (
-       <div style={this.setFieldStyle()} className="squareField">
-           {
-               this._allSquares.map((square) => {
-                return(
-                    <Square 
-                    key = {square.id}
-                    squareOpenOnClick = {() => {this.pickASquare(square.id)}}
-                    squareClass = {`${square.state} ${square.hasItem} ${square.mine} ${square.detection} ${square.around}`}
-                    squareStyle = {this.setSquareStyle()}
-                    />
-                )
-               })
-           }
-       </div>
-   )
-return squaresDiv
+            <div style={this.setFieldStyle()} className="squareField">
+                {
+                    this._allSquares.map((square) => {
+                        return (
+                            <Square
+                                key={square.id}
+                                squareOpenOnClick={() => { this.pickASquare(square.id) }}
+                                squareClass={`${square.state} ${square.hasItem} ${square.mine} ${square.detection} ${square.around}`}
+                                squareStyle={this.setSquareStyle()}
+                            />
+                        )
+                    })
+                }
+            </div>
+        )
+        return squaresDiv
     }
-    setFieldStyle () {
+    setFieldStyle() {
         let fieldStyle = {
             width: `${this._fieldWidth * this._squareSize + this._fieldWidth * (this._squareMargin * 2)}px`,
             height: `${this._fieldHeight * this._squareSize + this._fieldHeight * (this._squareMargin * 2)}px`,
@@ -52,7 +52,7 @@ return squaresDiv
     }
     setSquareStyle() {
         let squareStyle = {
-            width:  `${this._squareSize}px`,
+            width: `${this._squareSize}px`,
             height: `${this._squareSize}px`,
             background: this._squareColor,
             margin: `${this._squareMargin}px`
@@ -64,74 +64,74 @@ return squaresDiv
             return;
         }
         let index = this._allSquares.findIndex((square) => square.id === id);
-        const oneSquare = {...this._allSquares[index]};
+        const oneSquare = { ...this._allSquares[index] };
         if (oneSquare.state === 'closed') {
-        oneSquare.state = this.open;
-        if(oneSquare.id === this.randomObject) {
-            oneSquare.hasItem = this.objectFound;
-            this.gameIsOver = true;
-            // add this if you don't want to count as try when you find object
-            // this.counter--; 
-            this.congrats = true;
-        } else if (this.minesArray.includes(oneSquare.id)) {
-            oneSquare.mine = this.mine;
-            this.fail = true;
-            this.gameIsOver = true;
-        }
+            oneSquare.state = this.open;
+            if (oneSquare.id === this.randomObject) {
+                oneSquare.hasItem = this.objectFound;
+                this.gameIsOver = true;
+                // add this if you don't want to count as try when you find object
+                // this.counter--; 
+                this.congrats = true;
+            } else if (this.minesArray.includes(oneSquare.id)) {
+                oneSquare.mine = this.mine;
+                this.fail = true;
+                this.gameIsOver = true;
+            }
 
-        // Mine detection
-        // Hard level
-        if (this.diffLevel === true) {
-        if (this.minesArray.includes(oneSquare.id - 1) && !this.leftSide.includes(oneSquare.id)) {
-            oneSquare.around = this.around;
-        }
-        if (this.minesArray.includes(oneSquare.id + 1) && !this.rightSide.includes(oneSquare.id)) {
-            oneSquare.around = this.around;
-        }
-        if (
-            this.minesArray.includes(oneSquare.id - this._fieldWidth) ||
-            this.minesArray.includes(oneSquare.id + this._fieldWidth)) {
-            oneSquare.around = this.around;
+            // Mine detection
+            // Hard level
+            if (this.diffLevel === true) {
+                if (this.minesArray.includes(oneSquare.id - 1) && !this.leftSide.includes(oneSquare.id)) {
+                    oneSquare.around = this.around;
+                }
+                if (this.minesArray.includes(oneSquare.id + 1) && !this.rightSide.includes(oneSquare.id)) {
+                    oneSquare.around = this.around;
+                }
+                if (
+                    this.minesArray.includes(oneSquare.id - this._fieldWidth) ||
+                    this.minesArray.includes(oneSquare.id + this._fieldWidth)) {
+                    oneSquare.around = this.around;
+                }
             }
-        }
-        // Easy level
-        if (this.diffLevel === false) {
-        if (this.minesArray.includes(oneSquare.id - 1)) {
-            oneSquare.state = this.open;
-            if(this.leftSide.includes(oneSquare.id) || this.gameIsOver === true){
-            // doing nothing)) Так задумано. do not use return!!!
-            } else {
-            this._allSquares[index - 1].detection = this.detection;
+            // Easy level
+            if (this.diffLevel === false) {
+                if (this.minesArray.includes(oneSquare.id - 1)) {
+                    oneSquare.state = this.open;
+                    if (this.leftSide.includes(oneSquare.id) || this.gameIsOver === true) {
+                        // doing nothing)) Так задумано. do not use return!!!
+                    } else {
+                        this._allSquares[index - 1].detection = this.detection;
+                    }
+                }
+                if (this.minesArray.includes(oneSquare.id + 1)) {
+                    oneSquare.state = this.open;
+                    if (this.rightSide.includes(oneSquare.id) || this.gameIsOver === true) {
+                        //    do nothing)) do not use return!!!
+                    } else {
+                        this._allSquares[index + 1].detection = this.detection;
+                    }
+                }
+                if (this.minesArray.includes(oneSquare.id - this._fieldWidth)) {
+                    oneSquare.state = this.open;
+                    if (this.gameIsOver === true) {
+                        //    do nothing)) do not use return!!!
+                    } else {
+                        this._allSquares[index - this._fieldWidth].detection = this.detection;
+                    }
+                }
+                if (this.minesArray.includes(oneSquare.id + this._fieldWidth)) {
+                    oneSquare.state = this.open;
+                    if (this.gameIsOver === true) {
+                        //    do nothing))  do not use return!!!
+                    } else {
+                        this._allSquares[index + this._fieldWidth].detection = this.detection;
+                    }
+                }
             }
+            this.counter++;
+
         }
-        if (this.minesArray.includes(oneSquare.id + 1)) {
-            oneSquare.state = this.open;
-            if(this.rightSide.includes(oneSquare.id) || this.gameIsOver === true){
-            //    do nothing)) do not use return!!!
-            } else {
-            this._allSquares[index + 1].detection = this.detection;
-            }
-        }
-        if (this.minesArray.includes(oneSquare.id - this._fieldWidth)) {
-            oneSquare.state = this.open;
-            if(this.gameIsOver === true) {
-            //    do nothing)) do not use return!!!
-            } else {
-            this._allSquares[index - this._fieldWidth].detection = this.detection;
-            }
-        }
-        if (this.minesArray.includes(oneSquare.id + this._fieldWidth)) {
-            oneSquare.state = this.open;
-            if(this.gameIsOver === true) {
-            //    do nothing))  do not use return!!!
-            } else {
-            this._allSquares[index + this._fieldWidth].detection = this.detection;
-            }
-        }
-    }
-        this.counter++;
-        
-    }
         this._allSquares[index] = oneSquare;
     }
     clearSquareArray() {
@@ -140,15 +140,15 @@ return squaresDiv
     makeRandomNumbers() {
         this.randomObject = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight - 1));
         this.minesArray = [];
-        for (let i = 0; i < this._amountOfMines; i++){
+        for (let i = 0; i < this._amountOfMines; i++) {
             this.randomMine = Math.round(Math.random() * (this._fieldWidth * this._fieldHeight - 1));
             if (this.randomObject === this.randomMine || this.minesArray.includes(this.randomMine)) {
                 i--
                 continue;
             } else {
                 this.minesArray.push(this.randomMine);
+            }
         }
-    }
     }
     findSidesForDetectionHidden() {
         this.leftSide = [];

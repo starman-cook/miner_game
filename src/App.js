@@ -14,7 +14,7 @@ import CongratsMessage from './Components/CongratsMessage/CongratsMessage';
 //  и начальный цвет когда все клетки закрыты
 
 // CREATION OF SQUARE FILED (WIDTH, HEIGHT, SizeOfEachSquareInPixels, MARGIN, COLOR)
-const squareField = new SquareField(6, 6, 100, 5, 10, '#494949');
+const squareField = new SquareField(10, 10, 80, 5, 20, '#494949');
 squareField.createAllSquaresArray();
 squareField.makeRandomNumbers();
 squareField.findSidesForDetectionHidden();
@@ -22,7 +22,7 @@ squareField.findSidesForDetectionHidden();
 
 const App = () => {
   const [game, setGame] = useState(squareField.getSquareArray());
-  
+
   let squareDiv = squareField.getSquareDiv();
 
   const CreationOfTheGame = () => {
@@ -33,7 +33,7 @@ const App = () => {
   const reloadField = () => {
     squareField._allSquares.map((square) => {
       if (square.state === squareField.open) {
-      return CreationOfTheGame();
+        return CreationOfTheGame();
       }
     })
   }
@@ -62,41 +62,41 @@ const App = () => {
   return (
     <div onClick={reloadField} className="container">
       {squareDiv}
-    <CounterOfTries text={`Tries made:  ${squareField.counter}`} />
-    <div className='switch_mode'>
-    <ButtonReset 
-    btnOnClickReset={hardMode}
-    text='Hard Game Mode'
-    />
-    <ButtonReset 
-    btnOnClickReset={resetTheGame}
-    text='Reset the Game'
-    />
-    <ButtonReset 
-    btnOnClickReset={easyMode}
-    text='Easy Game Mode'
-    />
-    </div>
-    {squareField.congrats ? 
-    <CongratsMessage 
-    text={`Congratulations!!! You found the treasures and won the game! You have made ${squareField.counter} tries.`}/> 
-    : null}
-    {squareField.fail ? 
-    <CongratsMessage 
-    text='You have steped on pumkin-mine, the game is lost!(((('/> 
-    : null}
-    <p className='instructions'>
-      Инструкция: на поле спрятан сундук, но на поле также есть мины, 
-      для помощи в легком режиме игры при клике на безопасную клетку вы видите есть ли мины возле вас, 
-      они обозначаются флажком. 
-      На сложном уровне игры вы столкнетесь с красными клетками, они означают, что 
-      мины либо сверху от вас, либо снизу, или слева или справа, при умелом счете вы 
-      сможете найти сокровища. Внутри App.js на 17 строчке вы также можете очень легко менять 
-      размеры поля, размер клеток, количество мин и дефолтный цвет клеток.
-      Очень реомендую играть в Сложном Моде и плюс задать "10, 10, 50, 5, 30, '#494949'" полю, игра очень интересная в таком виде!.
-      Приятной игры!
+      <CounterOfTries text={`Tries made:  ${squareField.counter}`} />
+      <div className='switch_mode'>
+        <ButtonReset
+          btnOnClickReset={hardMode}
+          text='Hard Game Mode'
+        />
+        <ButtonReset
+          btnOnClickReset={resetTheGame}
+          text='Reset the Game'
+        />
+        <ButtonReset
+          btnOnClickReset={easyMode}
+          text='Easy Game Mode'
+        />
+      </div>
+      {squareField.congrats ?
+        <CongratsMessage
+          text={`Congratulations!!! You found the treasures and won the game! You have made ${squareField.counter} tries.`} />
+        : null}
+      {squareField.fail ?
+        <CongratsMessage
+          text='You have steped on pumkin-mine, the game is lost!((((' />
+        : null}
+      <p className='instructions'>
+        Инструкция: на поле спрятан сундук, но на поле также есть мины,
+        для помощи в легком режиме игры при клике на безопасную клетку вы видите есть ли мины возле вас,
+        они обозначаются флажком.
+        На сложном уровне игры вы столкнетесь с красными клетками, они означают, что
+        мины либо сверху от вас, либо снизу, или слева или справа, при умелом счете вы
+        сможете найти сокровища. Внутри App.js на 17 строчке вы также можете очень легко менять
+        размеры поля, размер клеток, количество мин и дефолтный цвет клеток.
+        Очень реомендую играть в Сложном Моде и плюс задать "10, 10, 50, 5, 30, '#494949'" полю, игра очень интересная в таком виде!.
+        Приятной игры!
     </p>
-    
+
     </div>
   );
 }
